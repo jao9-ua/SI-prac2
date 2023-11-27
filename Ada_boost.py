@@ -1,6 +1,7 @@
 import tensorflow as tf
 from tensorflow import keras
 import matplotlib.pyplot as plt
+import numpy as np
 
 def show_image(imagen, title):
    plt.figure()
@@ -11,8 +12,8 @@ def show_image(imagen, title):
 def plot_X(X, title, fila, columna):
   plt.title(title)
   plt.plot(X)
-  plt.xscale(xscale)
-  plt.yscale(yscale)
+  plt.xscale("linear")
+  plt.yscale("linear")
   plt.show()
 
 
@@ -28,7 +29,10 @@ for i in range(3):
  title = title + " -- Y_train[" + str(i) + "] = " + str(Y_train[i])
  show_image(X_train[i], title)
 
+fila=5
+columna=5
+
 features_fila_col = X_train[:, fila, columna]
 print(len(np.unique(features_fila_col)))
 title = "Valores en (" + str(fila) + ", " + str(columna) + ")"
-plot_X(features, title, fila, columna)
+plot_X(features_fila_col, title, fila, columna)
