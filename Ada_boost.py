@@ -6,10 +6,10 @@ import numpy as np
 def show_image(imagen, title):
    plt.figure()
    plt.suptitle(title)
-   plt.imshow(imagen, cmap = "Greys")
+   plt.imshow(imagen)
    plt.show()
 
-def plot_X(X, title, fila, columna):
+def plot_X(X, title):
   plt.title(title)
   plt.plot(X)
   plt.xscale("linear")
@@ -32,7 +32,12 @@ for i in range(3):
 fila=5
 columna=5
 
+#  Extrae valores de un pixel especifico
 features_fila_col = X_train[:, fila, columna]
+#Calcula valores unicos que existen en este pixel
 print(len(np.unique(features_fila_col)))
 title = "Valores en (" + str(fila) + ", " + str(columna) + ")"
-plot_X(features_fila_col, title, fila, columna)
+plot_X(features_fila_col, title)
+cant_seises = np.count_nonzero(Y_train == 6)
+
+print("Cantidad de seises: ", cant_seises)
