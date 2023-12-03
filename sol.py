@@ -57,29 +57,23 @@ class Adaboost:
             predictions += beta * classifier.predict(X)
         return np.sign(predictions)
 
-# Código de prueba con datos MNIST
 (X_train, Y_train), (X_test, Y_test) = keras.datasets.mnist.load_data()
 
-# Redimensiona las imágenes para aplanarlas y normalizar los píxeles
 X_train_flat = X_train.reshape(X_train.shape[0], -1) / 255.0
 X_test_flat = X_test.reshape(X_test.shape[0], -1) / 255.0
 
-# Convierte etiquetas a -1 y 1
 Y_train_binary = np.where(Y_train == 6, 1, -1)
 Y_test_binary = np.where(Y_test == 6, 1, -1)
 
-# Entrenamiento y predicción con Adaboost
 adaboost_classifier = Adaboost(T=20, A=10)
 adaboost_classifier.fit(X_train_flat, Y_train_binary)
 
-# Predicción en el conjunto de entrenamiento
 predictions_train = adaboost_classifier.predict(X_train_flat)
 accuracy_train = np.mean(predictions_train == Y_train_binary)
 
-# Predicción en el conjunto de prueba
 predictions_test = adaboost_classifier.predict(X_test_flat)
 accuracy_test = np.mean(predictions_test == Y_test_binary)
 
-# Imprime resultados
+
 print(f"Tasa de acierto en el conjunto de entrenamiento: {accuracy_train * 100:.2f}%")
 print(f"Tasa de acierto en el conjunto de prueba: {accuracy_test * 100:.2f}%")
